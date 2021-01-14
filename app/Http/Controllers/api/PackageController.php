@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Package;
 
 class PackageController extends Controller
 {
@@ -15,6 +16,8 @@ class PackageController extends Controller
     public function index()
     {
         //
+        $result = Package::all();
+        return response()->json($result);
     }
 
     /**
@@ -25,7 +28,9 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $data = Package::create($request->json()->all());
+        return response()->json($data);
     }
 
     /**
@@ -37,6 +42,8 @@ class PackageController extends Controller
     public function show($id)
     {
         //
+        $result = Package::where('transaction_id', $id)->get();
+        return response()->json($result);
     }
 
     /**
@@ -49,6 +56,9 @@ class PackageController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $result = Package::where('transaction_id', $id)
+                    ->update($request->json()->all());
+        return response()->json($result);
     }
 
     /**
@@ -60,5 +70,8 @@ class PackageController extends Controller
     public function destroy($id)
     {
         //
+        $result = Package::where('transaction_id', $id)
+                    ->delete();
+        return response()->json("Sukses dihapus");
     }
 }
