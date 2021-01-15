@@ -58,7 +58,7 @@ class PackageController extends Controller
         //
         $result = Package::where('transaction_id', $id)
                     ->update($request->json()->all());
-        return response()->json($result);
+        return response()->json("Data Berhasil di Update");
     }
 
     /**
